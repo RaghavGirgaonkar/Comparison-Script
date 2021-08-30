@@ -1,4 +1,9 @@
 #!env bash
+
+echo "********************************"
+echo "Running the pdmp DMs Test..."
+echo "********************************"
+
 declare -i c=-1
 declare -a filenames=()
 for i in $@
