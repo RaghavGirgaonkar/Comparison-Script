@@ -3,6 +3,10 @@
 source /Data/bcj/INPTA/soft/Pulsar/pulsarbashrc.sh
 source /home/asusobhanan/Work/V6/pinta.bashrc
 
+python3.6 -m pip install --user --upgrade pip
+python3.6 -m pip install --user scipy numpy lmfit
+python3.6 -m pip install --user statsmodels seaborn pandas importlib_metadata
+
 #read -p "Enter fits1 :" fits1
 #read -p "Enter fits2 :" fits2
 
