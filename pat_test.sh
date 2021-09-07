@@ -1,13 +1,13 @@
 for i in $@
 do
-    echo "Scrunching $FILE to 4 subbands"
+    echo "Scrunching $i to 4 subbands"
     pam -e .4sub.fits  --setnchn 4 --setnbin 64 -T  ${i} # i is the input file
 
     echo "Running Pam test involving DMs"
     dm=$(grep -w "Best DM" DM.txt | awk '/Best DM/ {print $4}')
     pam -m -d ${dm} -D template.fits
     
-    echo "using pat on scrunched $FILE"
+    echo "using pat on scrunched $i"
     pat -s template.fits -A PGS -f "tempo2" ${i}.4sub.fits > ${i}.tim
     
     echo "appending frequencies to $i.pat"
@@ -22,11 +22,12 @@ do
     tempo2 -nofix -us -output general2 -f ${i%%_*}.par  ${i}.tim -s "{bat} {post} {err}\n" > ${i}.res
 done
 
-## Things to correct :
+# Difference in frequencies
+    # If 0 then pat test passed
+# Compare the Res files 
+    # If 0 then res test passed
 
-# Need to check for use of template.fits > to be copied from some location/ renamed just after scrunching
-# Need to check for file in line 7 while making DM
-# Need to check for file location to be copied from in line 19 to make it platform independent
+# par and template file paths need to be inputs
 
 ## Steps mentioned in mail for last 2 tests :
 
