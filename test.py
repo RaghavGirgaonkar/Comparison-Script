@@ -37,6 +37,11 @@ class TestScript(unittest.TestCase):
             # Preprocessing step. 
             subprocess.run(["pam", "-e", ".4sub.fits", "--setnchn", "4", "--setnbin", "64", "-T", file], check=True)
 
+        renamed_files = []
+        for file in cls.files:
+            renamed_files.append(file[:-4] + ".4sub.fits")
+        cls.files = renamed_files
+
     def test_compare_1pam(self):
         print("Running Pam Process")
         dms = get_column_from_csv('DMs.txt', 0) # Get DMS from Column 0 in DMs.txt
