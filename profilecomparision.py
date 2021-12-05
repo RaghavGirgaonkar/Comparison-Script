@@ -78,7 +78,8 @@ def get_chisqrs(prf,diff,nbins):
      """
     print("Shape of prf = ", np.shape(prf)) 
     off_pulse = np.zeros(10)
-    off_pulse[:10] = prf[:10]
+    off_pulse[:10] = prf[:10]   #first 10
+    off_pulse[-10:] = prf[-10:]
     #off_pulse[118:] = prf[118:] #Making off pulse region
     # print("Off pulse Region ",off_pulse)
     op_rms = np.var(off_pulse) #Rms
@@ -90,7 +91,7 @@ def get_chisqrs(prf,diff,nbins):
     s = s/(nbins - 1)
     # print("Chisqr value = ",s)
 
-    return s 
+    return s,op_rms
     
 
 if __name__=="__main__":
@@ -126,8 +127,15 @@ if __name__=="__main__":
             continue
         
         prf1a, diff, result = prf_compare(prf0, prf1)
+        
+        chisqr,off_pulse = get_chisqrs(prf1a,diff,np.shape(diff)[0])
         print("Peak Difference = ",np.max(diff))
-        print("Peak Difference/RMS of Difference",np.max(diff)/np.sqrt(2)) 
+        print("Peak Difference/Off Pulse",np.max(diff)/off_pulse) 
+        
+        if((np.max(diff)/np.sqrt(2))<1.5):
+          sys.exit(1)
+        else:
+          sys.exit(0)
         # prf_as.append(prf1a)
         # all_differences.append(diff)
 
@@ -136,7 +144,7 @@ if __name__=="__main__":
         # diff_off_pulse[20:] = diff[45:] #Making off pulse region
         # difference_off_pulses.append(diff_off_pulse)
 
-        chisqr = get_chisqrs(prf1a,diff,np.shape(diff)[0])
+       # chisqr = get_chisqrs(prf1a,diff,np.shape(diff)[0])
         print("Chisqr value = ",chisqr)
         Chi_sqrs.append(chisqr)
         f2.write(names[1] + " " + str(chisqr)+"\n")
@@ -220,7 +228,4 @@ if __name__=="__main__":
     # plt.fill_between(lin,res_medians - res_stds,res_medians + res_stds,alpha = 0.5)
     # plt.xlabel("Phase")
     # # plt.savefig(dirr[-1] + " Subband 7 Differences.pdf") 
-    # # plt.savefig(dirr[-1] + " Subband 7 Differences.pdf")       
-    # plt.show()
-        
-    
+    # # plt.savefig(dirr[-1] + " Subband 7 Differences.pdf")   
