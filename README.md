@@ -8,6 +8,12 @@ Run the following commands before running any script:
 python3.6 -m pip install --user --upgrade pip
 
 python3.6 -m pip install --user scipy numpy lmfit statsmodels seaborn pandas importlib_metadata
+
+### **Download the following files from the repository to your working directory before running the script**
+1. profilecomparision.py
+2. dmdiff.py
+3. test.py
+
 ```
 
 ### My thoughts on the overall script:
