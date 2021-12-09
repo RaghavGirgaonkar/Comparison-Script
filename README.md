@@ -24,6 +24,14 @@ python3.6 -m pip install --user scipy numpy lmfit statsmodels seaborn pandas imp
 ```
 bash combined_trial.sh <fits file 1> <fits file 2>
 ```
+### **How the script works:**
+The script performs the following tests in sequential order:
+1. Profile comparison test
+<br /> The fits files are frequency-time scrunched to 64 nbins and profiles are centrally aligned. These files are then converted to .txt files which are input to the profilecomparision.py script. The profilecomparision.py script compares the files using the using the Ljung-Box test and outputs the statistics and corresponding p-value. The peak difference and off pulse are calculated by the get_chisqrs function in the python script. If the Peak Difference/Off Pulse < 1.5, the test passes.<br />
+2. DM comparison test
+<br /> text <br />
+3. Timing and residuals test
+<br /> text <br />
 ### **Our thoughts on the overall script:**
 ```
 Having the overall script run as a python script could be a good approach for the following reasons :
