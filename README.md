@@ -2,7 +2,7 @@
 
 ### Pre-requisites before running the script on your server:
 
-1. Install the following python libraries with the below commands:
+1. Install python libraries using the following commands:
 
 ```
 python3.6 -m pip install --user --upgrade pip
